@@ -1,0 +1,11 @@
+
+<div class="container">
+    {% for item in context7 %}
+    <div class="col-0">
+    <h1>{{ item.type_quiz }}</h1>
+   <h3>{{ item.quiz }}</h3>
+    </div>
+    <h5>Ответ:<input type="text" name="answer1" width="200" height="30">{{ item.answer }}</h5>
+
+    {% endfor %}
+</div>

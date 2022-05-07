@@ -1,0 +1,15 @@
+{% extends "bShop/base.html" %}
+
+{% block title %}listItem {% endblock title %}
+
+{% block body %}
+<div class="row">
+{% for object in object_list %}
+    <div class="col-3">
+    <h1><a href="{{ object.url }}">{{ object.name }}</a></h1>
+        <img src="{{ object.image.url }}" alt="">
+    </div>
+{% endfor %}
+</div>
+
+{% endblock body %}
