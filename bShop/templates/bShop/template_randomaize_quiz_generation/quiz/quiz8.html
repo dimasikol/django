@@ -1,4 +1,4 @@
-{% for item in context8 %}
+{% for item in answer8 %}
 <div class="container" >
   <h1>{{ item.type_quiz }}</h1>
   <h3>{{item.quiz}}</h3>
@@ -28,7 +28,7 @@
 </table>
 </div>
 
-  <h5>Ответ:<input type="text" name="answer8" width="200" height="30">{{ item.answer }}</h5>
+  <h5>Ответ:<input type="text" name="answer8" width="200" height="30"></h5>
   <h3>{{ item.quiz1 }}</h3>
 </div>
 {% endfor%}

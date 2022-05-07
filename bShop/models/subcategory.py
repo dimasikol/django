@@ -5,7 +5,6 @@ from django.urls import reverse
 from .category import Category
 
 
-
 class SubCategory(models.Model):
     name = models.CharField(verbose_name='Подкатегория', max_length=1000)
     description = RichTextUploadingField(verbose_name='Описание')

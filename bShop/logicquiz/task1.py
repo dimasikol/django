@@ -62,14 +62,65 @@ class Task1:
     def __str__(self):
         return f'биты {self.bit} {self.type_bit} правильный ответ {self.words_answer}'
 
-class Task5:
+class Task2:
     pass
+
+class Task3:
+    pass
+
+class Task4:
+    pass
+
+class Task5:
+    Task_num = Task1.Task_num
+    def __init__(self):
+        Task5.Task_num += 1
+        self.date = date['five']
+        self.text = self.date['text']
+        self.random_type_choise=random.choice(self.date['random_type']['5'])
+        self.type_znaks = random.choice(['/','//','*','**','+','-'])
+        if self.type_znaks in ['/','//']:
+            pass
+        else:
+            pass
+        self.quiz = 'вопрос'
+        self.answer = 'ответ'
+        self.variant = 'вариант'
+    def write(self):
+        return {"quiz":self.quiz,"variant":self.variant,"answer":self.answer,"type_quiz":Task5.Task_num}
+
 
 class Task6:
-    pass
+    Task_num = Task5.Task_num
+    def __init__(self):
+        Task6.Task_num += 1
+        self.date = date['six']
+        self.text = self.date['text']
+        self.num = [random.randint(11,43),random.randint(11,43)]
+        self.variant = [((random.randint(-45,45),random.randint(-45,45))) for _ in range(9)]
+        self.choice_znak = random.choice([">", ">=", "<", "<=","=="]),
+        self.choice_znak2 = random.choice([">", ">=", "<", "<=","=="]),
+        self.logic = random.choice(['and','or'])
+        self.count_YES=0
+        self.YES_OR_NO = random.choice(['"YES"','"NO"'])
+    def choice(self):
+        for i in range(len(self.variant)):
+            if self.logic=='and' and eval(f'{self.variant[i][0]} {self.choice_znak[0]} {self.num[0]} and {self.variant[i][1]} {self.choice_znak2[0]} {self.num[1]}'):
+                self.count_YES+=1
+            elif self.logic=='or' and eval(f'{self.variant[i][0]} {self.choice_znak[0]} {self.num[0]} or {self.variant[i][1]} {self.choice_znak2[0]} {self.num[1]}'):
+                self.count_YES += 1
+        if self.YES_OR_NO=='"NO"':
+            self.count_YES=9-self.count_YES
+
+        return self.count_YES
+    def write(self):
+        self.choice()
+        self.quiz = f"<h2>{self.text['text1']}</h2>  <br><h2>if s{self.choice_znak[0]}{self.num[0]} {self.logic} t{self.choice_znak2[0]}{self.num[1]}:<h2>&nbsp;&nbsp;&nbsp;&nbsp;print('YES')</h2><h2>else:</h2><h2>&nbsp;&nbsp;&nbsp;&nbsp;print('NO')</h2>"
+        return {"quiz":self.quiz,"variant":self.variant,"answer":self.count_YES,"type_quiz":Task6.Task_num,"YES_OR_NO":self.YES_OR_NO}
+
 
 class Task7:
-    Task_num = Task1.Task_num
+    Task_num = Task6.Task_num
     def __init__(self):
         Task7.Task_num+=1
         self.date = date['seven']
@@ -87,11 +138,10 @@ class Task7:
         self.answer_dict = {v:k for k, v in dict(self.answer_tuple).items()}
         self.answer1 = self.answer_dict[self.protokol]+self.answer_dict['://']+self.answer_dict[self.address[0]]+self.answer_dict["."]+self.answer_dict[self.address[1]]+self.answer_dict["."]+self.answer_dict[self.address[2]]+self.answer_dict["/"]+self.answer_dict[self.path]+self.answer_dict["/"]+self.answer_dict[self.file_name]+self.answer_dict["."]+self.answer_dict[self.file_type]
         self.answer_quiz = ''.join(list(map(lambda x:f'{x[0]}) {x[1]}<br>',self.answer_tuple)))
-
-
     def write(self):
         self.quiz=f"{self.date['text1']} {self.file_name}.{self.file_type} {self.date['text2']} {self.address[1]}.{self.address[2]} в директории {self.path} поддомена {self.address[0]} {self.date['text3']} {self.protokol} {self.date['text4']}<br>{self.answer_quiz}"
-        return {"quiz":self.quiz,"answer":str(self.answer1)+str(self.answer),"type_quiz":f'{Task7.Task_num}.Задание № 7'}
+        return {"quiz":self.quiz,"answer":str(self.answer1),"type_quiz":f'{Task7.Task_num}.Задание № 7'}
+
 
 class Task8:
     Task_num=Task7.Task_num
@@ -154,6 +204,6 @@ class Task10:
         self.kratnost = ''
         if self.variant_choice == 'кратное' or self.variant_choice == 'количество чисел':
             self.kratnost = self.quiz_answer[2]
-        self.write_answer2 = f"{self.text['text1']} <b>{len(self.list_change_num)}</b> {self.text['text2']} <p> <b>{self.variant_choice}</b> {self.kratnost}  <b>({', '.join(self.question_list)})</p></b>{self.text['text3']} {self.random_cc} {self.text['text4']} <p>{self.text['text5']}</p> <p>{self.text['text6']}</p> "
+        self.write_answer2 = f"{self.text['text1']} <b>{len(self.list_change_num)}</b> {self.text['text2']} <p> <b>{self.variant_choice}</b> {self.kratnost}  <b>({', '.join(self.question_list)})</p></b>{self.text['text3']} {self.random_cc} {self.text['text4']} <p>{self.text['text5']}</p>"
         return {"quiz": self.write_answer2, 'answer': self.quiz_answer[1], 'parametrs': self.variant_choice,
                 "type_quiz": f"{Task10.Task_num}.Задание №10(1)"}

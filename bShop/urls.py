@@ -6,7 +6,8 @@ urlpatterns = [
     path('category/<int:id>/', subcategory.SubCategoryView.as_view()),
     path('category/',category.CategoryView.as_view()),
     path('quiz/<int:id>',show_quiz.ShowQuizView.as_view()),
-    path('lk/<str:name>',lk_view.LkView.as_view()),
+    path('lk/<str:user>/<int:id>/', lk_view.ShowResult.as_view(), name='return_quiz'),
+    path('lk/<str:user>',lk_view.LkView.as_view()),
     path('login/',lk_view.Login.as_view()),
     path('register/',lk_view.Register.as_view())
 
