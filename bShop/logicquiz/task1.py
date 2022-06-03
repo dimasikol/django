@@ -69,7 +69,43 @@ class Task3:
     pass
 
 class Task4:
-    pass
+    @property
+    def get_table(self):
+        self.word = ' ABCDEFGH'
+        self.rand1 = [(1,4),(2,8),(4,9),(1,4),(5,10),(7,14)]
+        random.shuffle(self.rand1)
+        print(*self.rand1[0])
+        self.date = [[random.randint(*self.rand1[0]) if i==0 else random.randint(*self.rand1[1]) if i==1 else random.randint(*self.rand1[0]) if i==2 else random.randint(*self.rand1[0]) if i==3 else random.randint(*self.rand1[0]) if i==0 else random.randint(*self.rand1[0]) if i==4 else random.randint(*self.rand1[0]) if i==5 else random.randint(16,50) for i in range(7)] for _ in range(7)]
+        for i in range(7):
+            for j in range(7):
+                if i == 0 or j == 0:
+                    if i == 0:
+                        self.date[i][j] = self.word[j]
+                    else:
+                        self.date[i][j] = self.word[i]
+                else:
+                    if i == j:
+                        self.date[i][j] = 'Ø'
+                    else:
+                        self.date[j][i] = self.date[i][j]
+        self.date[1][6] += 15
+        self.answer_date = []
+        for k in range(2,6):
+
+            self.time_res=self.date[1][k]+self.date[k][len(self.date[0])-1]
+            self.answer_date.append(self.time_res)
+            try:
+                if isinstance(self.date[k][k+1],int) and isinstance(self.date[k][2],int):
+                     self.answer_date.append((self.time_res-self.date[1][k]+self.date[1][k-1]+self.date[k-1][k]))
+            except ValueError:
+                print('error Value')
+            self.answer_min=min(self.answer_date)
+        return self.date,self.answer_min
+
+
+    def write(self):
+        self.table,self.answer = self.get_table
+        return {"quiz":self.table,"answer":self.answer}
 
 class Task5:
     Task_num = Task1.Task_num
@@ -78,16 +114,30 @@ class Task5:
         self.date = date['five']
         self.text = self.date['text']
         self.random_type_choise=random.choice(self.date['random_type']['5'])
-        self.type_znaks = random.choice(['/','//','*','**','+','-'])
-        if self.type_znaks in ['/','//']:
-            pass
-        else:
-            pass
+        self.start_num= random.randint(2,44)
+        self.result = self.start_num
+        self.nums=[random.randint(1,20),random.randint(2,60)]
+        self.type_znaks = [random.choice(['*','**','+','-']),random.choice(['*','+','-'])]
+        self.spisok=random.choice(self.date['random_type']['5'])
+
         self.quiz = 'вопрос'
         self.answer = 'ответ'
         self.variant = 'вариант'
+    def create_quiz(self):
+        for item in self.spisok:
+            self.result= eval(f'{self.result}{self.type_znaks[item-1]}{self.nums[item-1]}')
+
+        return self.result
+
     def write(self):
-        return {"quiz":self.quiz,"variant":self.variant,"answer":self.answer,"type_quiz":Task5.Task_num}
+        #self.quiz= self.text['text']+self.type_znaks[0]+" "+str(self.nums[0])+'<br>'+self.type_znaks[1]+str(self.nums[1])+self.text['text1']
+        self.quiz= f'{self.text["text"]} {self.date["keys"][self.type_znaks[0]]}' \
+                   f' {self.nums[0]}<br>{self.date["keys"][self.type_znaks[1]]} ' \
+                   f'b {self.text["text1"]}{self.text["text2"]} {self.date["keys"][self.type_znaks[0]]} {self.nums[0]} ' \
+                   f'{self.text["text3"]} {self.date["keys"][self.type_znaks[1]]} {self.nums[1]} {self.text["text4"]} {"".join(list(map(str,self.spisok)))}' \
+                   f' {self.text["text5"]} {self.start_num} в {self.create_quiz()} {self.text["text6"]} <br> ответ :{self.nums[1]}'
+
+        return {"quiz":self.quiz,"variant":self.variant,"answer":self.answer,"type_quiz":{Task5.Task_num}}
 
 
 class Task6:

@@ -4,7 +4,6 @@ import random
 from apps.settings import BASE_DIR
 
 with open(os.path.join(BASE_DIR, r'bShop/logicquiz/scratch_1.json'), 'r', encoding='UTF-8') as file:
-    # with open('scratch_1.json') as file:
     date_json = json.load(file)
 
 
